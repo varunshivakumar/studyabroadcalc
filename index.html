@@ -19,17 +19,19 @@
             if($('.selectedSeason')[0] == undefined || $('.select')[0].innerText == "Select Country"){
                 $('#programContainer').slideUp();
                 $('#programReqs').slideDown();
+                console.log('wtf');
             } else {
+
                 // Filter out programs
                 var count = 0;
                 $('.program').each(function(){
-                    console.log(this.innerText + " " + $('.select')[0].innerText);
+                    //console.log(this.innerText + " " + $('.select')[0].innerText);
                     if( this.innerText.search($('.select')[0].innerText) < 0 ){
-                        $(this).slideUp();
+                        $(this).hide();
                     } else if ( this.innerText.search($('.selectedSeason')[0].innerText) < 0 ){
-                        $(this).slideUp();
+                        $(this).hide();
                     } else {
-                        $(this).slideDown();
+                        $(this).show();
                         count++;
                     }
                 });
@@ -37,9 +39,6 @@
                 if(count > 0){
                     $('#programContainer').slideDown();
                     $('#programReqs').slideUp();
-                } else{
-                    $('#programContainer').slideUp();
-                    $('#programReqs').slideDown();
                 }
             }
         }
@@ -76,8 +75,20 @@
 
         }
 
-        $(document).ready(function(){
 
+        $(document).ready(function(){
+            var count = 0;
+            $('#clickThisBtn').on("click", function(){
+                if(count % 2 == 1){
+                    showPrograms();
+                }
+                count++;
+            });
+
+            $(document).on('#countryChange','DOMSubtreeModified',function(){
+                console.log('HelloHello');
+                //showPrograms();
+            });
 
 
             $('.program').click(function(){
@@ -124,8 +135,8 @@
 <div class="posRel" style="">
     <div class="posRel" style="height:220px;overflow:hidden;">
         <img src="images/redBackground.jpg" width="100%"/>
-        <div class="posAbs backColPWhite bordRad10 vertCenterMid shadow3" style="top:25px;left:25px;padding:15px;height:100px;width:100px;">
-            <img src="sbulogo.png" class="" height="80px" style=""/>
+        <div class="posAbs backColPWhite bordRad10 vertCenterMid shadow3" style="top:25px;left:25px;padding:15px;height:80px;width:80px;">
+            <img src="sbulogo.png" class="" height="70px" style=""/>
         </div>
     </div>
     <div class="posAbs centerText width100 colWhite lato" style="bottom:130px;font-size:4em;text-shadow: 2px 2px 12px #444444;font-weight:600;">Study Abroad Calculator</div>
@@ -158,13 +169,10 @@
                 <span class="colRed" style="margin-right:8px;">Step 2: </span>
                 <span class="colGray">Choose a Country</span>
             </div>
-            <div class="">
-                <div class="drop-menu" style="outline:none !important;"
-                     onmouseover="showPrograms();"
-                     onclick="showPrograms();"
-                >
-                    <div class="select" style="outline:none !important;" onchange="showPrograms();">
-                        <span>Select Country</span>
+            <div id="clickThisBtn" class="">
+                <div class="drop-menu" style="outline:none !important;">
+                    <div class="select" style="outline:none !important;" onclick="console.log('select');">
+                        <span id="countryChange" onclick="console.log('easdf');">Select Country</span>
                         <i class="fa fa-chevron-down posRel" style="top:2px;"></i>
                     </div>
                     <input type="hidden" name="gender">
@@ -199,9 +207,78 @@
                 <span class="hideItem season">Fall '17</span>
                 <span class="hideItem price" style="">10965</span>
                 <span class="floatRight">$10,965.00</span>
-
             </div>
-            <div style="border-bottom:1px solid lightgrey;"></div>
+            <div class="program" style="padding-left:5px;padding-right:5px;">
+                <span class="name inlineBlock vertAlignTop" style="font-weight:700;margin-right:10px;width:450px;">Australian National University</span>
+                <span class="hideItem location" style="margin-right:10px;">Australia</span>
+                <span class="hideItem season">Winter '17</span>
+                <span class="hideItem price" style="">15295</span>
+                <span class="floatRight">$15,295.00</span>
+            </div>
+            <div class="program" style="padding-left:5px;padding-right:5px;">
+                <span class="name inlineBlock vertAlignTop" style="font-weight:700;margin-right:10px;width:450px;">Nanjing University</span>
+                <span class="hideItem location" style="margin-right:10px;">China</span>
+                <span class="hideItem season">Summer '17</span>
+                <span class="hideItem price" style="">10370</span>
+                <span class="floatRight">$10,370.00</span>
+            </div>
+            <div class="program" style="padding-left:5px;padding-right:5px;">
+                <span class="name inlineBlock vertAlignTop" style="font-weight:700;margin-right:10px;width:450px;">University of Sussex</span>
+                <span class="hideItem location" style="margin-right:10px;">Great Britain</span>
+                <span class="hideItem season">Fall '17</span>
+                <span class="hideItem price" style="">10365</span>
+                <span class="floatRight">$10,365.00</span>
+            </div>
+            <div class="program" style="padding-left:5px;padding-right:5px;">
+                <span class="name inlineBlock vertAlignTop" style="font-weight:700;margin-right:10px;width:450px;">University of College London</span>
+                <span class="hideItem location" style="margin-right:10px;">Great Britain</span>
+                <span class="hideItem season">Fall '17</span>
+                <span class="hideItem price" style="">11865</span>
+                <span class="floatRight">$11,865.00</span>
+            </div>
+            <div class="program" style="padding-left:5px;padding-right:5px;">
+                <span class="name inlineBlock vertAlignTop" style="font-weight:700;margin-right:10px;width:450px;">Okayama University</span>
+                <span class="hideItem location" style="margin-right:10px;">Japan</span>
+                <span class="hideItem season">Fall '17</span>
+                <span class="hideItem price" style="">10965</span>
+                <span class="floatRight">$10,965.00</span>
+            </div>
+            <div class="program" style="padding-left:5px;padding-right:5px;">
+                <span class="name inlineBlock vertAlignTop" style="font-weight:700;margin-right:10px;width:450px;">Deakin University</span>
+                <span class="hideItem location" style="margin-right:10px;">Australia</span>
+                <span class="hideItem season">Fall '17</span>
+                <span class="hideItem price" style="">12105</span>
+                <span class="floatRight">$12,105.00</span>
+            </div>
+            <div class="program" style="padding-left:5px;padding-right:5px;">
+                <span class="name inlineBlock vertAlignTop" style="font-weight:700;margin-right:10px;width:450px;">Ajou University</span>
+                <span class="hideItem location" style="margin-right:10px;">Japan</span>
+                <span class="hideItem season">Fall '17</span>
+                <span class="hideItem price" style="">8725</span>
+                <span class="floatRight">$8,725.00</span>
+            </div>
+            <div class="program" style="padding-left:5px;padding-right:5px;">
+                <span class="name inlineBlock vertAlignTop" style="font-weight:700;margin-right:10px;width:450px;">Sciences Po Lille</span>
+                <span class="hideItem location" style="margin-right:10px;">France</span>
+                <span class="hideItem season">Fall '17</span>
+                <span class="hideItem price" style="">11165</span>
+                <span class="floatRight">$11,165.00</span>
+            </div>
+            <div class="program" style="padding-left:5px;padding-right:5px;">
+                <span class="name inlineBlock vertAlignTop" style="font-weight:700;margin-right:10px;width:450px;">University of Lyon</span>
+                <span class="hideItem location" style="margin-right:10px;">France</span>
+                <span class="hideItem season">Fall '17</span>
+                <span class="hideItem price" style="">10015</span>
+                <span class="floatRight">$10,015.00</span>
+            </div>
+            <div class="program" style="padding-left:5px;padding-right:5px;">
+                <span class="name inlineBlock vertAlignTop" style="font-weight:700;margin-right:10px;width:450px;">Waseda University</span>
+                <span class="hideItem location" style="margin-right:10px;">Japan</span>
+                <span class="hideItem season">Fall '17</span>
+                <span class="hideItem price" style="">11816</span>
+                <span class="floatRight">$11,816.00</span>
+            </div>
+
         </div>
 
         <!-- Financial Aid -->
